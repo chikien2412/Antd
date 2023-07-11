@@ -1,0 +1,32 @@
+table tr td {
+    display: flex;
+    flex-wrap: wrap;
+    width: 360px;
+    border: 2px solid black;
+    border-style: solid
+  }
+  tr td{
+    border: 1px solid black;
+  }
+  
+  .cell {
+    width: 60px;
+    height: 60px;
+  }
+  .chess-board{
+      padding: 50px;
+  }
+  .input-chessboard{
+    margin-bottom: 40px;
+  }
+  label{
+    padding: 10px
+  }
+  /* .white {
+    background-color: white;
+  }
+  
+  .black {
+    background-color: black;
+  }
+   */
