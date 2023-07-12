@@ -30,16 +30,19 @@ import ChessBoard from "./chessboard/ChessBoard";
 import Pomodoro from "./pomodoro/pomodoro";
 import Caculator from "./caculator/caculator";
 import Quote from "./quote/quote";
-import "./App.css";
 import ChessSvg from "./logo/ChessSvg";
 import CaculatorSvg from "./logo/Caculator";
 import PomodoroSvg from "./logo/Pomodoro";
 import QuoteSvg from "./logo/Quote";
 import { useTranslation } from "react-i18next";
 import { locals } from "./i18n/i18n";
+
+import MoonSvg from "./logo/Moon";
+import SunSvg from "./logo/Sun";
+import "./App.css";
 const { Text, Title } = Typography;
 
-const { Header, Content, Sider, Footer } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const item2s = [
   {
@@ -68,6 +71,16 @@ const item2s = [
 const Home = () => {
   const { t, i18n } = useTranslation();
   const currentLanguage = locals[i18n.language];
+  const [darkMode, setDarkMode] = useState(false);
+  const [layoutBgColor, setLayoutBgColor] = useState("dark");
+  const handleToggle = () => {
+    setDarkMode(!darkMode);
+    if (!darkMode) {
+      setLayoutBgColor("light");
+    } else {
+      setLayoutBgColor("dark");
+    }
+  };
   const breadcrumbNameMap = {
     "/chessboard": t("chessboard"),
     "/caculator": t("caculator"),
@@ -95,6 +108,7 @@ const Home = () => {
       label: <Link to="/quote">{t("quote")}</Link>,
       key: "/quote",
     },
+    
   ];
 
   const location = useLocation();
@@ -121,19 +135,21 @@ const Home = () => {
   };
   return (
     <div>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Layout>
-          <Sider
+      <Layout >
+        <Layout style={{ minHeight: "100vh" }}>
+          <Layout.Sider
             width={200}
             style={{
               background: "##1F2937",
             }}
+            theme = {layoutBgColor}
             trigger={null}
             collapsible
             collapsed={collapsed}
           >
+            <Space >
             <Header
-              style={{ backgroundColor: "#1F2937", paddingInline: "30px" }}
+              style={{ backgroundColor: "#1F2937", paddingInline: "61px" }}
             >
               <Space>
                 {!collapsed ? (
@@ -171,23 +187,34 @@ const Home = () => {
                 )}
               </Space>
             </Header>
+            </Space>
+           <Space>
             <Menu
               mode="inline"
-              theme="dark"
+              theme= {layoutBgColor}
               defaultSelectedKeys={location.pathname}
               defaultOpenKeys={["sub1"]}
               style={{
                 height: "100%",
                 borderRight: 0,
-                backgroundColor: "#1F2937",
+                // backgroundColor: "#1F2937",
               }}
               items={!collapsed ? item1s : item2s}
-            />
-          </Sider>
+            >
+              
+            </Menu>
+            </Space>
+            
+           <Space style={{marginTop: "10px", marginLeft:"28px"}}>
+           <Button style={{width:'45px', marginLeft:'100px'}} onClick={handleToggle}>{darkMode ? <MoonSvg/> : <SunSvg/>}</Button>
+           </Space>
+           
+          </Layout.Sider>
+          
           <Layout
             style={{
               padding: "0 24px 24px",
-              minHeight: "90vh",
+              minHeight: '100vh'
             }}
           >
             <Header
@@ -219,6 +246,7 @@ const Home = () => {
                   />
                 </Space>
                 <Space>
+                
                   <Space direction="vertical">
                     <Space wrap>
                       <Dropdown
