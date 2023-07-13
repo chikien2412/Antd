@@ -13,18 +13,19 @@ import {
   Image,
   Typography,
   Space,
-  ConfigProvider,
+  
   Button,
   Input,
   Avatar,
   Dropdown,
 } from "antd";
 import {
-  BrowserRouter,
+  
   Routes,
   Route,
   Link,
   useLocation,
+  useNavigate 
 } from "react-router-dom";
 import { useState } from "react";
 import ChessBoard from "./chessboard/ChessBoard";
@@ -40,7 +41,7 @@ import QuoteSvg from "./logo/Quote";
 import HomeSvg from "./logo/Hello";
 import { useTranslation } from "react-i18next";
 import { locals } from "./i18n/i18n";
-
+import LoginForm from './LoginForm/LoginForm';
 import MoonSvg from "./logo/Moon";
 import SunSvg from "./logo/Sun";
 import "./App.css";
@@ -76,12 +77,12 @@ const item2s = [
   },
   {
     icon: <QuoteSvg />,
-    label: <Link to="/quote"></Link>,
-    key: "/quote",
+    label: <Link to="/quotes"></Link>,
+    key: "/quotes",
   },
 ];
 
-const Home = () => {
+const App = () => {
   const { t, i18n } = useTranslation();
   const currentLanguage = locals[i18n.language];
   const [darkMode, setDarkMode] = useState(false);
@@ -98,7 +99,7 @@ const Home = () => {
     "/chessboard": t("chessboard"),
     "/caculator": t("caculator"),
     "/pomodoro": t("pomodoro"),
-    "/quote": t("quote"),
+    "/quotes": t("quotes"),
     "/hello": t("hello"),
     "/convert": t("convert"),
   };
@@ -130,13 +131,16 @@ const Home = () => {
     },
     {
       icon: <QuoteSvg />,
-      label: <Link to="/quote">{t("quote")}</Link>,
-      key: "/quote",
+      label: <Link to="/quotes">{t("quotes")}</Link>,
+      key: "/quotes",
     },
   ];
-
+  
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
+  const [token,setToken] = useState(null);
+
   const pathSnippets = location.pathname.split("/").filter((i) => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join("/")}`;
@@ -145,6 +149,10 @@ const Home = () => {
       title: <Link to={url}>{breadcrumbNameMap[url]}</Link>,
     };
   });
+  if((!token || !token.length)&& location.pathname !=='/login') {
+    // window.location.href='./login';
+    navigate('/login')
+  }
   const breadcrumbItems = [
     {
       title: <Link to="/">{t("home")}</Link>,
@@ -159,7 +167,8 @@ const Home = () => {
   };
   return (
     <div>
-      <Layout>
+      {token ? 
+      (<Layout>
         <Layout>
           <Sider
             width={200}
@@ -404,7 +413,7 @@ const Home = () => {
                 <Route path="/chessboard" element={<ChessBoard />}></Route>
                 <Route path="/caculator" element={<Caculator />}></Route>
                 <Route path="/pomodoro" element={<Pomodoro />}></Route>
-                <Route path="/quote" element={<Quote />}></Route>
+                <Route path="/quotes" element={<Quote />}></Route>
                 <Route path="/hello" element={<Hello />}></Route>
                 <Route path="/convert" element={<Convert />}></Route>
                 Convert
@@ -415,15 +424,28 @@ const Home = () => {
             </Footer>
           </Layout>
         </Layout>
-      </Layout>
+      </Layout>) 
+       :<Routes>
+              <Route path='/login' element={
+                 <LoginForm
+                 onSubmit={async (username, password) => {
+                 const response = await fetch('http://localhost:3000/authenticate', {
+                   method: 'POST',
+                   headers: {
+                     'Content-Type': 'application/json',
+                   },
+                   body: JSON.stringify({ username, password })
+                 });
+                 const { token } = await response.json();
+                 setToken(token);
+               }}/>
+              }>
+               
+              </Route>
+          </Routes> 
+    }
     </div>
   );
 };
-const App = () => (
-  <BrowserRouter>
-    <ConfigProvider>
-      <Home />
-    </ConfigProvider>
-  </BrowserRouter>
-);
+
 export default App;
