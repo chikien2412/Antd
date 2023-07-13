@@ -2,6 +2,7 @@
 import React from "react";
 import "./chess.css";
 import { useState } from "react";
+import {Row, Col} from'antd'
 // import {
 //   useParams,
 // } from "react-router-dom"
@@ -23,20 +24,20 @@ function ChessBoard() {
   }
   const renderChessBoard = () => {
     return Array.from({ length: number }).map((index, row) => (
-      <tr key={row}>
+      <Row key={row}>
         {Array.from({ length: number }).map((index, col) => {
           let cellColor;
           if (!flip) cellColor = (row + col) % 2 === 0 ? colorLe : colorChan;
           else cellColor = (row + col) % 2 === 1 ? colorLe : colorChan;
           return (
-            <td
+            <Col
               key={`${row}-${col}`}
               className="cell"
               style={{ backgroundColor: cellColor }}
-            ></td>
+            ></Col>
           );
         })}
-      </tr>
+      </Row>
     ));
   };
   return (

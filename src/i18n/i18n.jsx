@@ -39,7 +39,9 @@ const resources = {
       pomodoro: "Pomodoro",
       quote: "Quote",
       search:"Search",
-      home: "Home"
+      home: "Home",
+      hello:"HelloWorld",
+      convert:"Convert"
     },
   },
   vi: {
@@ -50,6 +52,8 @@ const resources = {
       quote: "Châm ngôn",
       search:"Tìm kiếm",
       home: "Trang chủ",
+      hello:"Xin chào!",
+      convert:"Chuyển đổi"
     },
   },
 };

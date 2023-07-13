@@ -3,6 +3,7 @@ import {
   MenuFoldOutlined,
   SearchOutlined,
   DownOutlined,
+  TransactionOutlined 
 } from "@ant-design/icons";
 import {
   Breadcrumb,
@@ -30,10 +31,13 @@ import ChessBoard from "./chessboard/ChessBoard";
 import Pomodoro from "./pomodoro/pomodoro";
 import Caculator from "./caculator/caculator";
 import Quote from "./quote/quote";
+import Hello from "./helloworld/helloworld";
+import Convert from "./convert/convert"
 import ChessSvg from "./logo/ChessSvg";
 import CaculatorSvg from "./logo/Caculator";
 import PomodoroSvg from "./logo/Pomodoro";
 import QuoteSvg from "./logo/Quote";
+import HomeSvg from "./logo/Hello"
 import { useTranslation } from "react-i18next";
 import { locals } from "./i18n/i18n";
 
@@ -42,9 +46,19 @@ import SunSvg from "./logo/Sun";
 import "./App.css";
 const { Text, Title } = Typography;
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer,Sider } = Layout;
 
 const item2s = [
+  {
+    icon: <HomeSvg />,
+    label: <Link to="/hello"></Link>,
+    key: "/hello",
+  },
+    {
+      icon: <TransactionOutlined />,
+      label: <Link to="/convert"></Link>,
+      key: "/convert",
+    },
   {
     icon: <ChessSvg />,
     label: <Link to="/chessboard"></Link>,
@@ -67,7 +81,6 @@ const item2s = [
   },
 ];
 
-
 const Home = () => {
   const { t, i18n } = useTranslation();
   const currentLanguage = locals[i18n.language];
@@ -86,8 +99,20 @@ const Home = () => {
     "/caculator": t("caculator"),
     "/pomodoro": t("pomodoro"),
     "/quote": t("quote"),
+    "/hello": t("hello"),
+    "/convert": t("convert"),
   };
   const item1s = [
+    {
+      icon: <HomeSvg />,
+      label: <Link to="/hello">{t("hello")}</Link>,
+      key: "/hello",
+    },
+    {
+      icon: <TransactionOutlined />,
+      label: <Link to="/convert">{t("convert")}</Link>,
+      key: "/convert",
+    },
     {
       icon: <ChessSvg />,
       label: <Link to="/chessboard">{t("chessboard")}</Link>,
@@ -108,7 +133,6 @@ const Home = () => {
       label: <Link to="/quote">{t("quote")}</Link>,
       key: "/quote",
     },
-    
   ];
 
   const location = useLocation();
@@ -136,85 +160,104 @@ const Home = () => {
   return (
     <div>
       <Layout >
-        <Layout style={{ minHeight: "100vh" }}>
-          <Layout.Sider
+        <Layout >
+          <Sider
             width={200}
             style={{
               background: "##1F2937",
             }}
-            theme = {layoutBgColor}
+            theme={layoutBgColor}
             trigger={null}
             collapsible
             collapsed={collapsed}
           >
-            <Space >
-            <Header
-              style={{ backgroundColor: "#1F2937", paddingInline: "61px" }}
-            >
-              <Space>
-                {!collapsed ? (
-                  <Space>
-                    <a href="/">
-                      <Image
-                        width="36px"
-                        height="30.03px"
-                        src="../public/download.png"
-                        preview={false}
-                      ></Image>
-                    </a>
-                    <Title
-                      style={{
-                        fontSize: "20px",
-                        marginBottom: "0",
-                        color: "white",
-                      }}
-                      disable
-                    >
-                      LCK
-                    </Title>
-                  </Space>
-                ) : (
-                  <Space>
-                    <a href="/">
-                      <Image
-                        width="36px"
-                        height="30.03px"
-                        src="../public/download.png"
-                        preview={false}
-                      ></Image>
-                    </a>
-                  </Space>
-                )}
-              </Space>
-            </Header>
-            </Space>
-           <Space>
-            <Menu
-              mode="inline"
-              theme= {layoutBgColor}
-              defaultSelectedKeys={location.pathname}
-              defaultOpenKeys={["sub1"]}
-              style={{
-                height: "100%",
-                borderRight: 0,
-                // backgroundColor: "#1F2937",
-              }}
-              items={!collapsed ? item1s : item2s}
-            >
-              
-            </Menu>
-            </Space>
             
-           <Space style={{marginTop: "10px", marginLeft:"28px"}}>
-           <Button style={{width:'45px', marginLeft:'100px'}} onClick={handleToggle}>{darkMode ? <MoonSvg/> : <SunSvg/>}</Button>
-           </Space>
-           
-          </Layout.Sider>
+              <Header
+                style={{ backgroundColor: "#1F2937",paddingInline: "20px"}}
+              >
+                <Space>
+                  {!collapsed ? (
+                    <Space>
+                      <a href="/">
+                        <Image
+                          width="36px"
+                          height="30.03px"
+                          src="../public/download.png"
+                          preview={false}
+                        ></Image>
+                      </a>
+                      <Title
+                        style={{
+                          fontSize: "20px",
+                          marginBottom: "0",
+                          color: "white",
+                          
+                        }}
+                        disable
+                      >
+                        LCK
+                      </Title>
+                    </Space>
+                  ) : (
+                    <Space>
+                      <a href="/">
+                        <Image
+                          width="36px"
+                          height="30.03px"
+                          src="../public/download.png"
+                          preview={false}
+                        ></Image>
+                      </a>
+                    </Space>
+                  )}
+                </Space>
+              </Header>
+              {!collapsed ? (<Space direction="vertical" style={{borderBottom:"1px solid #888E9B", width:"100%"}}>
+                    <Image style={{width:"80px",marginLeft:"50px",marginTop:"10px"}}src="../public/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png" preview={false}></Image>
+                    <Title style={{color:"#888E9B", fontSize:"20px",marginLeft:"25px"}}>Lương Chí Kiên</Title>
+                  </Space>) : 
+                  (<Space direction="vertical" style={{borderBottom:"1px solid #888E9B", width:"100%"}}>
+                    <Image style={{width:"40px",marginLeft:"20px",marginTop:"10px",marginBottom:"5px"}}src="../public/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png" preview={false}></Image>
+                  </Space>) }
+                  
+              <Menu
+                mode="inline"
+                theme={layoutBgColor}
+                defaultSelectedKeys={location.pathname}
+                defaultOpenKeys={["sub1"]}
+                style={{
+                  // minHeight: "100vh",
+                  borderRight: 0,
+                  // backgroundColor: "#1F2937",
+                }}
+                items={!collapsed ? item1s : item2s}
+              ></Menu>
           
+
+            <Space style={{ marginTop: "450px", marginLeft: "28px" }}>
+            {!collapsed ? (<Button
+                style={{ width: "45px", marginLeft: "100px" }}
+                onClick={handleToggle}
+              >
+                {darkMode ? <MoonSvg /> : <SunSvg />}
+              </Button>):
+              (
+                <Button
+                style={{ width: "45px" }}
+                onClick={handleToggle}
+              >
+                {darkMode ? <MoonSvg /> : <SunSvg />}
+              </Button>
+              )
+              }
+              
+            </Space>
+          </Sider>
+
           <Layout
             style={{
               padding: "0 24px 24px",
-              minHeight: '100vh'
+              minHeight: "100vh",
             }}
           >
             <Header
@@ -246,7 +289,6 @@ const Home = () => {
                   />
                 </Space>
                 <Space>
-                
                   <Space direction="vertical">
                     <Space wrap>
                       <Dropdown
@@ -325,9 +367,7 @@ const Home = () => {
                   }}
                 >
                   {pathSnippets.map((snippet, index) => (
-                    <span key={index}>
-                      {t(snippet)}
-                    </span>
+                    <span key={index}>{t(snippet)}</span>
                   ))}
                 </Text>
               </Space>
@@ -336,6 +376,9 @@ const Home = () => {
                 <Route path="/caculator" element={<Caculator />}></Route>
                 <Route path="/pomodoro" element={<Pomodoro />}></Route>
                 <Route path="/quote" element={<Quote />}></Route>
+                <Route path="/hello" element={<Hello />}></Route>
+                <Route path="/convert" element={<Convert />}></Route>
+                Convert
               </Routes>
             </Content>
             <Footer style={{ textAlign: "center" }}>

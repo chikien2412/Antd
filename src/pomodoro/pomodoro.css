@@ -43,3 +43,23 @@
   box-shadow: 5px 5px;
   border-radius: 5px;
 }
+
+.button-setting {
+  width: 50px !important;
+  height: 50px !important;
+  font-family: "Roboto Mono", monospace;
+  background-color: #eabf9f;
+  color: #1e212d;
+  /* box-shadow: 5px 5px; */
+  border-radius: 50%;
+}
+
+.button-setting.break-time {
+  width: 50px !important;
+  height: 50px !important;
+  font-family: "Roboto Mono", monospace;
+  background-color: white ;
+  color: #eabf9f;
+  /* box-shadow: 5px 5px; */
+  border-radius: 50%;
+}
