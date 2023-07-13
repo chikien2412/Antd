@@ -3,7 +3,7 @@ import {
   MenuFoldOutlined,
   SearchOutlined,
   DownOutlined,
-  TransactionOutlined 
+  TransactionOutlined,
 } from "@ant-design/icons";
 import {
   Breadcrumb,
@@ -32,12 +32,12 @@ import Pomodoro from "./pomodoro/pomodoro";
 import Caculator from "./caculator/caculator";
 import Quote from "./quote/quote";
 import Hello from "./helloworld/helloworld";
-import Convert from "./convert/convert"
+import Convert from "./convert/convert";
 import ChessSvg from "./logo/ChessSvg";
 import CaculatorSvg from "./logo/Caculator";
 import PomodoroSvg from "./logo/Pomodoro";
 import QuoteSvg from "./logo/Quote";
-import HomeSvg from "./logo/Hello"
+import HomeSvg from "./logo/Hello";
 import { useTranslation } from "react-i18next";
 import { locals } from "./i18n/i18n";
 
@@ -46,7 +46,7 @@ import SunSvg from "./logo/Sun";
 import "./App.css";
 const { Text, Title } = Typography;
 
-const { Header, Content, Footer,Sider } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
 const item2s = [
   {
@@ -54,11 +54,11 @@ const item2s = [
     label: <Link to="/hello"></Link>,
     key: "/hello",
   },
-    {
-      icon: <TransactionOutlined />,
-      label: <Link to="/convert"></Link>,
-      key: "/convert",
-    },
+  {
+    icon: <TransactionOutlined />,
+    label: <Link to="/convert"></Link>,
+    key: "/convert",
+  },
   {
     icon: <ChessSvg />,
     label: <Link to="/chessboard"></Link>,
@@ -159,8 +159,8 @@ const Home = () => {
   };
   return (
     <div>
-      <Layout >
-        <Layout >
+      <Layout>
+        <Layout>
           <Sider
             width={200}
             style={{
@@ -171,86 +171,115 @@ const Home = () => {
             collapsible
             collapsed={collapsed}
           >
-            
-              <Header
-                style={{ backgroundColor: "#1F2937",paddingInline: "20px"}}
+            <Header
+              style={{ backgroundColor: "#1F2937", paddingInline: "20px" }}
+            >
+              <Space>
+                {!collapsed ? (
+                  <Space>
+                    <a href="/">
+                      <Image
+                        width="36px"
+                        height="30.03px"
+                        // src="../public/download.png"
+                        src="/download.png"
+                        preview={false}
+                      ></Image>
+                    </a>
+                    <Title
+                      style={{
+                        fontSize: "20px",
+                        marginBottom: "0",
+                        color: "white",
+                      }}
+                      disable
+                    >
+                      LCK
+                    </Title>
+                  </Space>
+                ) : (
+                  <Space>
+                    <a href="/">
+                      <Image
+                        width="36px"
+                        height="30.03px"
+                        // src="../public/download.png"
+                        src="/download.png"
+                        preview={false}
+                      ></Image>
+                    </a>
+                  </Space>
+                )}
+              </Space>
+            </Header>
+            {!collapsed ? (
+              <Space
+                direction="vertical"
+                style={{ borderBottom: "1px solid #888E9B", width: "100%" }}
               >
-                <Space>
-                  {!collapsed ? (
-                    <Space>
-                      <a href="/">
-                        <Image
-                          width="36px"
-                          height="30.03px"
-                          src="../public/download.png"
-                          preview={false}
-                        ></Image>
-                      </a>
-                      <Title
-                        style={{
-                          fontSize: "20px",
-                          marginBottom: "0",
-                          color: "white",
-                          
-                        }}
-                        disable
-                      >
-                        LCK
-                      </Title>
-                    </Space>
-                  ) : (
-                    <Space>
-                      <a href="/">
-                        <Image
-                          width="36px"
-                          height="30.03px"
-                          src="../public/download.png"
-                          preview={false}
-                        ></Image>
-                      </a>
-                    </Space>
-                  )}
-                </Space>
-              </Header>
-              {!collapsed ? (<Space direction="vertical" style={{borderBottom:"1px solid #888E9B", width:"100%"}}>
-                    <Image style={{width:"80px",marginLeft:"50px",marginTop:"10px"}}src="../public/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png" preview={false}></Image>
-                    <Title style={{color:"#888E9B", fontSize:"20px",marginLeft:"25px"}}>Lương Chí Kiên</Title>
-                  </Space>) : 
-                  (<Space direction="vertical" style={{borderBottom:"1px solid #888E9B", width:"100%"}}>
-                    <Image style={{width:"40px",marginLeft:"20px",marginTop:"10px",marginBottom:"5px"}}src="../public/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png" preview={false}></Image>
-                  </Space>) }
-                  
-              <Menu
-                mode="inline"
-                theme={layoutBgColor}
-                defaultSelectedKeys={location.pathname}
-                defaultOpenKeys={["sub1"]}
-                style={{
-                  // minHeight: "100vh",
-                  borderRight: 0,
-                  // backgroundColor: "#1F2937",
-                }}
-                items={!collapsed ? item1s : item2s}
-              ></Menu>
-          
+                <Image
+                  style={{
+                    width: "80px",
+                    marginLeft: "50px",
+                    marginTop: "10px",
+                  }}
+                  src="/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
+                  preview={false}
+                ></Image>
+                <Title
+                  style={{
+                    color: "#888E9B",
+                    fontSize: "20px",
+                    marginLeft: "25px",
+                  }}
+                >
+                  Lương Chí Kiên
+                </Title>
+              </Space>
+            ) : (
+              <Space
+                direction="vertical"
+                style={{ borderBottom: "1px solid #888E9B", width: "100%" }}
+              >
+                <Image
+                  style={{
+                    width: "40px",
+                    marginLeft: "20px",
+                    marginTop: "10px",
+                    marginBottom: "5px",
+                  }}
+                  src="/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
+                  preview={false}
+                ></Image>
+              </Space>
+            )}
+
+            <Menu
+              mode="inline"
+              theme={layoutBgColor}
+              defaultSelectedKeys={location.pathname}
+              defaultOpenKeys={["sub1"]}
+              style={{
+                // minHeight: "100vh",
+                borderRight: 0,
+                // backgroundColor: "#1F2937",
+              }}
+              items={!collapsed ? item1s : item2s}
+            ></Menu>
 
             <Space style={{ marginTop: "450px", marginLeft: "28px" }}>
-            {!collapsed ? (<Button
-                style={{ width: "45px", marginLeft: "100px" }}
-                onClick={handleToggle}
-              >
-                {darkMode ? <MoonSvg /> : <SunSvg />}
-              </Button>):
-              (
+              {!collapsed ? (
                 <Button
-                style={{ width: "45px" }}
-                onClick={handleToggle}
-              >
-                {darkMode ? <MoonSvg /> : <SunSvg />}
-              </Button>
-              )
-              }
-              
+                  style={{ width: "45px", marginLeft: "100px" }}
+                  onClick={handleToggle}
+                >
+                  {darkMode ? <MoonSvg /> : <SunSvg />}
+                </Button>
+              ) : (
+                <Button style={{ width: "45px" }} onClick={handleToggle}>
+                  {darkMode ? <MoonSvg /> : <SunSvg />}
+                </Button>
+              )}
             </Space>
           </Sider>
 
@@ -301,7 +330,7 @@ const Home = () => {
                                   height: "20px",
                                   marginRight: "10px",
                                 }}
-                                src="../public/united-kingdom.png"
+                                src="/united-kingdom.png"
                                 preview={false}
                               />
                               ENG
@@ -313,7 +342,7 @@ const Home = () => {
                                   height: "20px",
                                   marginRight: "10px",
                                 }}
-                                src="../public/vietnam.png"
+                                src="/vietnam.png"
                                 preview={false}
                               />
                               VIE
@@ -334,7 +363,7 @@ const Home = () => {
                     }}
                     src={
                       <img
-                        src="../public/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
+                        src="/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
                         alt="avatar"
                       />
                     }

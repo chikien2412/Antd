@@ -10,7 +10,7 @@ export const locals = {
           height: "20px",
           marginRight: "10px",
         }}
-        src="../public/united-kingdom.png"
+        src="/united-kingdom.png"
         preview={false}
       />
     </>,
@@ -24,7 +24,7 @@ export const locals = {
           height: "20px",
           marginRight: "10px",
         }}
-        src="../public/vietnam.png"
+        src="/vietnam.png"
         preview={false}
       />
     </>,
