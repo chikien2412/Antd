@@ -1,8 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { Image } from "antd";
-// import United from "../public/united-kingdom.png"
-// import Vietnam from "../public/vietnam.png"
+export const BASE_URL = import.meta.env.BASE_URL
+const path = `${BASE_URL}`;
+
 export const locals = {
   en: [
     <>
@@ -12,7 +13,7 @@ export const locals = {
           height: "20px",
           marginRight: "10px",
         }}
-        src="/united-kingdom.png"
+        src={`${path}united-kingdom.png`}
         preview={false}
       />
     </>,
@@ -26,7 +27,7 @@ export const locals = {
           height: "20px",
           marginRight: "10px",
         }}
-        src="/vietnam.png"
+        src={`${path}vietnam.png`}
         preview={false}
       />
     </>,

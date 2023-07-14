@@ -1,6 +1,7 @@
 import { Button, Input, Space, Image, Checkbox } from "antd";
 import { useState } from "react";
-
+export const BASE_URL = import.meta.env.BASE_URL
+const path = `${BASE_URL}`;
 function Hello() {
   const [world, setWorld] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -38,7 +39,7 @@ function Hello() {
           {world ? (
             <>
               <span>Tên của bạn là: {uppercase ? world.toUpperCase() :  world.toLowerCase()}</span>
-              <Image style={{ height: "200px" }} src="../public/cho-cuoi-deu.jpg" />
+              <Image style={{ height: "200px" }} src={`${path}cho-cuoi-deu.jpg`} />
             </>
           ) : null}
         </Space>

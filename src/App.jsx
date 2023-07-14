@@ -35,13 +35,9 @@ import { useTranslation } from "react-i18next";
 import { locals } from "./i18n/i18n";
 import MoonSvg from "./logo/Moon";
 import SunSvg from "./logo/Sun";
-import Dowload from "../public/download.png"
-import Spiderman from "../public/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
-import United from "../public/united-kingdom.png"
-import Vietnam from "../public/vietnam.png"
 import "./App.css";
-// export const BASE_URL = import.meta.env.BASE_URL
-// const path = `${BASE_URL}/`;
+export const BASE_URL = import.meta.env.BASE_URL
+const path = `${BASE_URL}`;
 const { Text, Title } = Typography;
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -186,9 +182,8 @@ const App = () => {
                           width="36px"
                           height="30.03px"
                           // src="../public/download.png"
-                          src={Dowload}
-                        
-                          
+                          // src={Dowload}    
+                          src={`${path}download.png`}                    
                           preview={false}
                         ></Image>
                       </a>
@@ -210,7 +205,7 @@ const App = () => {
                           width="36px"
                           height="30.03px"
                           // src="../public/download.png"
-                          src={Dowload}
+                          src={`${path}download.png`}
                           preview={false}
                         ></Image>
                       </a>
@@ -229,7 +224,7 @@ const App = () => {
                       marginLeft: "50px",
                       marginTop: "10px",
                     }}
-                    src={Spiderman}
+                    src={`${path}spider-man-comic-new-logo-322E9DE914-seeklogo.com.png`}
                     preview={false}
                   ></Image>
                   <Title
@@ -254,7 +249,7 @@ const App = () => {
                       marginTop: "10px",
                       marginBottom: "5px",
                     }}
-                    src={Spiderman}
+                    src={`${path}spider-man-comic-new-logo-322E9DE914-seeklogo.com.png`}
                     preview={false}
                   ></Image>
                 </Space>
@@ -340,7 +335,7 @@ const App = () => {
                                     height: "20px",
                                     marginRight: "10px",
                                   }}
-                                  src={United}
+                                  src={`${path}united-kingdom.png`}
                                   preview={false}
                                 />
                                 ENG
@@ -352,7 +347,7 @@ const App = () => {
                                     height: "20px",
                                     marginRight: "10px",
                                   }}
-                                  src={Vietnam}
+                                  src={`${path}vietnam.png`}
                                   preview={false}
                                 />
                                 VIE
@@ -373,7 +368,7 @@ const App = () => {
                       }}
                       src={
                         <img
-                          src={Spiderman}
+                          src={`${path}spider-man-comic-new-logo-322E9DE914-seeklogo.com.png`}
                           alt="avatar"
                         />
                       }
