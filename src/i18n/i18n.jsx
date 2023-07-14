@@ -1,6 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { Image } from "antd";
+// import United from "../public/united-kingdom.png"
+// import Vietnam from "../public/vietnam.png"
 export const locals = {
   en: [
     <>

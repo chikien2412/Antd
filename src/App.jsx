@@ -13,20 +13,12 @@ import {
   Image,
   Typography,
   Space,
-  
   Button,
   Input,
   Avatar,
   Dropdown,
 } from "antd";
-import {
-  
-  Routes,
-  Route,
-  Link,
-  useLocation,
-  useNavigate 
-} from "react-router-dom";
+import { Switch, Route, Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import ChessBoard from "./chessboard/ChessBoard";
 import Pomodoro from "./pomodoro/pomodoro";
@@ -41,10 +33,15 @@ import QuoteSvg from "./logo/Quote";
 import HomeSvg from "./logo/Hello";
 import { useTranslation } from "react-i18next";
 import { locals } from "./i18n/i18n";
-import LoginForm from './LoginForm/LoginForm';
 import MoonSvg from "./logo/Moon";
 import SunSvg from "./logo/Sun";
+import Dowload from "../public/download.png"
+import Spiderman from "../public/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
+import United from "../public/united-kingdom.png"
+import Vietnam from "../public/vietnam.png"
 import "./App.css";
+// export const BASE_URL = import.meta.env.BASE_URL
+// const path = `${BASE_URL}/`;
 const { Text, Title } = Typography;
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -135,11 +132,9 @@ const App = () => {
       key: "/quotes",
     },
   ];
-  
+
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate();
-  const [token,setToken] = useState(null);
 
   const pathSnippets = location.pathname.split("/").filter((i) => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
@@ -149,10 +144,7 @@ const App = () => {
       title: <Link to={url}>{breadcrumbNameMap[url]}</Link>,
     };
   });
-  if((!token || !token.length)&& location.pathname !=='/login') {
-    // window.location.href='./login';
-    navigate('/login')
-  }
+
   const breadcrumbItems = [
     {
       title: <Link to="/">{t("home")}</Link>,
@@ -165,285 +157,290 @@ const App = () => {
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
+
+
   return (
     <div>
-      {token ? 
-      (<Layout>
+     
         <Layout>
-          <Sider
-            width={200}
-            style={{
-              background: "##1F2937",
-            }}
-            theme={layoutBgColor}
-            trigger={null}
-            collapsible
-            collapsed={collapsed}
-          >
-            <Header
-              style={{ backgroundColor: "#1F2937", paddingInline: "20px" }}
+          <Layout>
+            <Sider
+              width={200}
+              style={{
+                background: "##1F2937",
+              }}
+              theme={layoutBgColor}
+              trigger={null}
+              collapsible
+              collapsed={collapsed}
             >
-              <Space>
+              <Header
+                style={{ backgroundColor: "#1F2937", paddingInline: "20px" }}
+              >
+                <Space>
+                  {!collapsed ? (
+                    <Space>
+                      <a href="/">
+                        <Image
+                          width="36px"
+                          height="30.03px"
+                          // src="../public/download.png"
+                          src={Dowload}
+                        
+                          
+                          preview={false}
+                        ></Image>
+                      </a>
+                      <Title
+                        style={{
+                          fontSize: "20px",
+                          marginBottom: "0",
+                          color: "white",
+                        }}
+                        disable
+                      >
+                        LCK
+                      </Title>
+                    </Space>
+                  ) : (
+                    <Space>
+                      <a href="/">
+                        <Image
+                          width="36px"
+                          height="30.03px"
+                          // src="../public/download.png"
+                          src={Dowload}
+                          preview={false}
+                        ></Image>
+                      </a>
+                    </Space>
+                  )}
+                </Space>
+              </Header>
+              {!collapsed ? (
+                <Space
+                  direction="vertical"
+                  style={{ borderBottom: "1px solid #888E9B", width: "100%" }}
+                >
+                  <Image
+                    style={{
+                      width: "80px",
+                      marginLeft: "50px",
+                      marginTop: "10px",
+                    }}
+                    src={Spiderman}
+                    preview={false}
+                  ></Image>
+                  <Title
+                    style={{
+                      color: "#888E9B",
+                      fontSize: "20px",
+                      marginLeft: "25px",
+                    }}
+                  >
+                    Lương Chí Kiên
+                  </Title>
+                </Space>
+              ) : (
+                <Space
+                  direction="vertical"
+                  style={{ borderBottom: "1px solid #888E9B", width: "100%" }}
+                >
+                  <Image
+                    style={{
+                      width: "40px",
+                      marginLeft: "20px",
+                      marginTop: "10px",
+                      marginBottom: "5px",
+                    }}
+                    src={Spiderman}
+                    preview={false}
+                  ></Image>
+                </Space>
+              )}
+
+              <Menu
+                mode="inline"
+                theme={layoutBgColor}
+                defaultSelectedKeys={location.pathname}
+                defaultOpenKeys={["sub1"]}
+                style={{
+                  // minHeight: "100vh",
+                  borderRight: 0,
+                  // backgroundColor: "#1F2937",
+                }}
+                items={!collapsed ? item1s : item2s}
+              ></Menu>
+
+              <Space style={{ marginTop: "450px", marginLeft: "28px" }}>
                 {!collapsed ? (
-                  <Space>
-                    <a href="/">
-                      <Image
-                        width="36px"
-                        height="30.03px"
-                        // src="../public/download.png"
-                        src="/download.png"
-                        preview={false}
-                      ></Image>
-                    </a>
-                    <Title
-                      style={{
-                        fontSize: "20px",
-                        marginBottom: "0",
-                        color: "white",
-                      }}
-                      disable
-                    >
-                      LCK
-                    </Title>
-                  </Space>
+                  <Button
+                    style={{ width: "45px", marginLeft: "100px" }}
+                    onClick={handleToggle}
+                  >
+                    {darkMode ? <MoonSvg /> : <SunSvg />}
+                  </Button>
                 ) : (
-                  <Space>
-                    <a href="/">
-                      <Image
-                        width="36px"
-                        height="30.03px"
-                        // src="../public/download.png"
-                        src="/download.png"
-                        preview={false}
-                      ></Image>
-                    </a>
-                  </Space>
+                  <Button style={{ width: "45px" }} onClick={handleToggle}>
+                    {darkMode ? <MoonSvg /> : <SunSvg />}
+                  </Button>
                 )}
               </Space>
-            </Header>
-            {!collapsed ? (
-              <Space
-                direction="vertical"
-                style={{ borderBottom: "1px solid #888E9B", width: "100%" }}
-              >
-                <Image
-                  style={{
-                    width: "80px",
-                    marginLeft: "50px",
-                    marginTop: "10px",
-                  }}
-                  src="/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
-                  preview={false}
-                ></Image>
-                <Title
-                  style={{
-                    color: "#888E9B",
-                    fontSize: "20px",
-                    marginLeft: "25px",
-                  }}
-                >
-                  Lương Chí Kiên
-                </Title>
-              </Space>
-            ) : (
-              <Space
-                direction="vertical"
-                style={{ borderBottom: "1px solid #888E9B", width: "100%" }}
-              >
-                <Image
-                  style={{
-                    width: "40px",
-                    marginLeft: "20px",
-                    marginTop: "10px",
-                    marginBottom: "5px",
-                  }}
-                  src="/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
-                  preview={false}
-                ></Image>
-              </Space>
-            )}
+            </Sider>
 
-            <Menu
-              mode="inline"
-              theme={layoutBgColor}
-              defaultSelectedKeys={location.pathname}
-              defaultOpenKeys={["sub1"]}
+            <Layout
               style={{
-                // minHeight: "100vh",
-                borderRight: 0,
-                // backgroundColor: "#1F2937",
-              }}
-              items={!collapsed ? item1s : item2s}
-            ></Menu>
-
-            <Space style={{ marginTop: "450px", marginLeft: "28px" }}>
-              {!collapsed ? (
-                <Button
-                  style={{ width: "45px", marginLeft: "100px" }}
-                  onClick={handleToggle}
-                >
-                  {darkMode ? <MoonSvg /> : <SunSvg />}
-                </Button>
-              ) : (
-                <Button style={{ width: "45px" }} onClick={handleToggle}>
-                  {darkMode ? <MoonSvg /> : <SunSvg />}
-                </Button>
-              )}
-            </Space>
-          </Sider>
-
-          <Layout
-            style={{
-              padding: "0 24px 24px",
-              minHeight: "100vh",
-            }}
-          >
-            <Header
-              style={{
-                padding: 0,
-                background: colorBgContainer,
+                padding: "0 24px 24px",
+                minHeight: "100vh",
               }}
             >
-              <Space
-                style={{ display: "flex", justifyContent: "space-between" }}
+              <Header
+                style={{
+                  padding: 0,
+                  background: colorBgContainer,
+                }}
               >
-                <Space>
-                  <Button
-                    type="text"
-                    icon={
-                      collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
-                    }
-                    onClick={() => setCollapsed(!collapsed)}
-                    style={{
-                      fontSize: "16px",
-                      width: 64,
-                      height: 64,
-                    }}
-                  />
-                  <Input
-                    size="large"
-                    placeholder={t("search")}
-                    prefix={<SearchOutlined />}
-                  />
-                </Space>
-                <Space>
-                  <Space direction="vertical">
-                    <Space wrap>
-                      <Dropdown
-                        overlay={
-                          <Menu onClick={(e) => changeLanguage(e.key)}>
-                            <Menu.Item key="en">
-                              <Image
-                                style={{
-                                  width: "20px",
-                                  height: "20px",
-                                  marginRight: "10px",
-                                }}
-                                src="/united-kingdom.png"
-                                preview={false}
-                              />
-                              ENG
-                            </Menu.Item>
-                            <Menu.Item key="vi">
-                              <Image
-                                style={{
-                                  width: "20px",
-                                  height: "20px",
-                                  marginRight: "10px",
-                                }}
-                                src="/vietnam.png"
-                                preview={false}
-                              />
-                              VIE
-                            </Menu.Item>
-                          </Menu>
-                        }
-                        placement="bottomLeft"
-                      >
-                        <Button>
-                          {currentLanguage} <DownOutlined />
-                        </Button>
-                      </Dropdown>
-                    </Space>
+                <Space
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Space>
+                    <Button
+                      type="text"
+                      icon={
+                        collapsed ? (
+                          <MenuUnfoldOutlined />
+                        ) : (
+                          <MenuFoldOutlined />
+                        )
+                      }
+                      onClick={() => setCollapsed(!collapsed)}
+                      style={{
+                        fontSize: "16px",
+                        width: 64,
+                        height: 64,
+                      }}
+                    />
+                    <Input
+                      size="large"
+                      placeholder={t("search")}
+                      prefix={<SearchOutlined />}
+                    />
                   </Space>
-                  <Avatar
-                    style={{
-                      marginRight: "10px",
-                    }}
-                    src={
-                      <img
-                        src="/spider-man-comic-new-logo-322E9DE914-seeklogo.com.png"
-                        alt="avatar"
-                      />
-                    }
-                  />
+                  <Space>
+                    <Space direction="vertical">
+                      <Space wrap>
+                        <Dropdown
+                          overlay={
+                            <Menu onClick={(e) => changeLanguage(e.key)}>
+                              <Menu.Item key="en">
+                                <Image
+                                  style={{
+                                    width: "20px",
+                                    height: "20px",
+                                    marginRight: "10px",
+                                  }}
+                                  src={United}
+                                  preview={false}
+                                />
+                                ENG
+                              </Menu.Item>
+                              <Menu.Item key="vi">
+                                <Image
+                                  style={{
+                                    width: "20px",
+                                    height: "20px",
+                                    marginRight: "10px",
+                                  }}
+                                  src={Vietnam}
+                                  preview={false}
+                                />
+                                VIE
+                              </Menu.Item>
+                            </Menu>
+                          }
+                          placement="bottomLeft"
+                        >
+                          <Button>
+                            {currentLanguage} <DownOutlined />
+                          </Button>
+                        </Dropdown>
+                      </Space>
+                    </Space>
+                    <Avatar
+                      style={{
+                        marginRight: "10px",
+                      }}
+                      src={
+                        <img
+                          src={Spiderman}
+                          alt="avatar"
+                        />
+                      }
+                    />
+                  </Space>
                 </Space>
-              </Space>
-            </Header>
+              </Header>
 
-            <Breadcrumb
-              style={{
-                margin: "16px 0",
-              }}
-              items={breadcrumbItems}
-            >
-              {" "}
-            </Breadcrumb>
-            <Content
-              style={{
-                padding: 24,
-                margin: 0,
-                minHeight: 360,
-                background: colorBgContainer,
-              }}
-            >
-              <Space style={{ marginBottom: "20px" }}>
-                <Text
-                  style={{
-                    textTransform: "uppercase",
-                    fontFamily: "Roboto Mono",
-                  }}
-                >
-                  {pathSnippets.map((snippet, index) => (
-                    <span key={index}>{t(snippet)}</span>
-                  ))}
-                </Text>
-              </Space>
-              <Routes>
-                <Route path="/chessboard" element={<ChessBoard />}></Route>
-                <Route path="/caculator" element={<Caculator />}></Route>
-                <Route path="/pomodoro" element={<Pomodoro />}></Route>
-                <Route path="/quotes" element={<Quote />}></Route>
-                <Route path="/hello" element={<Hello />}></Route>
-                <Route path="/convert" element={<Convert />}></Route>
-                Convert
-              </Routes>
-            </Content>
-            <Footer style={{ textAlign: "center" }}>
-              Ant Design ©2023 Created by Chi Kien
-            </Footer>
+              <Breadcrumb
+                style={{
+                  margin: "16px 0",
+                }}
+                items={breadcrumbItems}
+              >
+                {" "}
+              </Breadcrumb>
+              <Content
+                style={{
+                  padding: 24,
+                  margin: 0,
+                  minHeight: 360,
+                  background: colorBgContainer,
+                }}
+              >
+                <Space style={{ marginBottom: "20px" }}>
+                  <Text
+                    style={{
+                      textTransform: "uppercase",
+                      fontFamily: "Roboto Mono",
+                    }}
+                  >
+                    {pathSnippets.map((snippet, index) => (
+                      <span key={index}>{t(snippet)}</span>
+                    ))}
+                  </Text>
+                </Space>
+                <Switch>
+                  <Route path="/chessboard">
+                    <ChessBoard />
+                  </Route>
+                  <Route path="/caculator">
+                    <Caculator />
+                  </Route>
+                  <Route path="/pomodoro">
+                    <Pomodoro />
+                  </Route>
+                  <Route path="/quotes">
+                    <Quote />
+                  </Route>
+                  <Route path="/hello">
+                    <Hello />
+                  </Route>
+                  <Route path="/convert">
+                    <Convert />
+                  </Route>
+                  Convert
+                </Switch>
+              </Content>
+              <Footer style={{ textAlign: "center" }}>
+                Ant Design ©2023 Created by Chi Kien
+              </Footer>
+            </Layout>
           </Layout>
         </Layout>
-      </Layout>) 
-       :<Routes>
-              <Route path='/login' element={
-                 <LoginForm
-                 onSubmit={async (username, password) => {
-                 const response = await fetch('http://localhost:3000/authenticate', {
-                   method: 'POST',
-                   headers: {
-                     'Content-Type': 'application/json',
-                   },
-                   body: JSON.stringify({ username, password })
-                 });
-                 const { token } = await response.json();
-                 setToken(token);
-               }}/>
-              }>
-               
-              </Route>
-          </Routes> 
-    }
+     
+    
+   
     </div>
   );
 };

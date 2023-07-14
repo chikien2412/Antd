@@ -24,7 +24,7 @@ function ChessBoard() {
   }
   const renderChessBoard = () => {
     return Array.from({ length: number }).map((index, row) => (
-      <Row key={row}>
+      <Row key={row} >
         {Array.from({ length: number }).map((index, col) => {
           let cellColor;
           if (!flip) cellColor = (row + col) % 2 === 0 ? colorLe : colorChan;
@@ -33,7 +33,7 @@ function ChessBoard() {
             <Col
               key={`${row}-${col}`}
               className="cell"
-              style={{ backgroundColor: cellColor }}
+              style={{ backgroundColor: cellColor,border:"1px solid black" }}
             ></Col>
           );
         })}
